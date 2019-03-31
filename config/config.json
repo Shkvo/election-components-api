@@ -1,0 +1,32 @@
+{
+  "username": "dimabazanov",
+  "password": null,
+  "database": "elections_dev",
+  "host": "127.0.0.1",
+  "dialect": "postgres",
+  "port": 5431,
+  "development": {
+    "username": "dimabazanov",
+    "password": null,
+    "database": "elections_dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "port": 5431
+  },
+  "test": {
+    "username": "dimabazanov",
+    "password": null,
+    "database": "elections_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "port": 5431
+  },
+  "production": {
+    "username": "dimabazanov",
+    "password": null,
+    "database": "elections_prod",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "port": 5431
+  }
+}
