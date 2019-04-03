@@ -34,7 +34,64 @@ const get = async ctx => {
   }
 };
 
+const create = async ctx => {
+  try {
+    const candidate = ctx.request.body;
+    const data = await Candidates.create(candidate);
+
+    ctx.body = {
+      status: 'success',
+      data
+    };
+  } catch (error) {
+    ctx.body = {
+      message: 'Error has occured',
+      error
+    };
+  }
+};
+
+const update = async ctx => {
+  try {
+    const candidate = ctx.request.body;
+    const data = await Candidates.update(candidate);
+
+    ctx.body = {
+      status: 'success',
+      data
+    };
+  } catch (error) {
+    ctx.body = {
+      message: 'Error has occured',
+      error
+    };
+  }
+};
+
+const remove = async ctx => {
+  const { id } = ctx.params;
+  const candidate = await Candidates.findOne({
+    where: {
+      id
+    }
+  });
+  try {
+    await candidate.destroy();
+    ctx.body = {
+      status: 'success',
+    };
+  } catch (error) {
+    ctx.body = {
+      message: 'Error has occured',
+      error
+    };
+  }
+};
+
 export default {
   all,
-  get
+  get,
+  create,
+  update,
+  remove
 };
