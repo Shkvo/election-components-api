@@ -1,4 +1,6 @@
-import models from '../../models';
+import models from '../models';
+import { throwError } from '../helpers/error';
+
 const { sequelize, Votes } = models;
 
 const all = async ctx => {
@@ -10,10 +12,7 @@ const all = async ctx => {
       data
     };
   } catch (error) {
-    ctx.body = {
-      message: 'Error has occured',
-      error
-    };
+    throwError(ctx, error);
   }
 };
 
@@ -27,17 +26,13 @@ const get = async ctx => {
       data
     };
   } catch (error) {
-    ctx.body = {
-      message: 'Error has occured',
-      error
-    };
+    throwError(ctx, error);
   }
 };
 
 const create = async ctx => {
   try {
     const vote = ctx.request.body;
-
     const data = await Votes.create(vote);
 
     ctx.body = {
@@ -45,10 +40,7 @@ const create = async ctx => {
       data
     };
   } catch (error) {
-    ctx.body = {
-      message: 'Error has occured',
-      error
-    };
+    throwError(ctx, error);
   }
 };
 
@@ -65,10 +57,7 @@ const overall = async ctx => {
       data
     };
   } catch (error) {
-    ctx.body = {
-      message: 'Error has occured',
-      error
-    };
+    throwError(ctx, error);
   }
 };
 
@@ -90,10 +79,7 @@ const region = async ctx => {
       data
     };
   } catch (error) {
-    ctx.body = {
-      message: 'Error has occured',
-      error
-    };
+    throwError(ctx, error);
   }
 };
 

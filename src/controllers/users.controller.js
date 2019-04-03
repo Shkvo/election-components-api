@@ -1,4 +1,6 @@
-import models from '../../models';
+import models from '../models';
+import { throwError } from '../helpers/error';
+
 const { Users } = models;
 
 const all = async ctx => {
@@ -10,10 +12,7 @@ const all = async ctx => {
       data
     };
   } catch (error) {
-    ctx.body = {
-      message: 'Error has occured',
-      error
-    };
+    throwError(ctx, error);
   }
 };
 
@@ -27,10 +26,7 @@ const get = async ctx => {
       data
     };
   } catch (error) {
-    ctx.body = {
-      message: 'Error has occured',
-      error
-    };
+    throwError(ctx, error);
   }
 };
 
@@ -44,10 +40,7 @@ const create = async ctx => {
       data
     };
   } catch (error) {
-    ctx.body = {
-      message: 'Error has occured',
-      error
-    };
+    throwError(ctx, error);
   }
 };
 
@@ -61,10 +54,7 @@ const update = async ctx => {
       data
     };
   } catch (error) {
-    ctx.body = {
-      message: 'Error has occured',
-      error
-    };
+    throwError(ctx, error);
   }
 };
 
@@ -81,10 +71,7 @@ const remove = async ctx => {
       status: 'success',
     };
   } catch (error) {
-    ctx.body = {
-      message: 'Error has occured',
-      error
-    };
+    throwError(ctx, error);
   }
 };
 
