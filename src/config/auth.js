@@ -11,16 +11,8 @@ const options = {
   passReqToCallback: true
 };
 
-const tokenExtractor = req => {
-  let token = null;
-  if (req && req.header) {
-    token = req.header['authorization'];
-  }
-  return token;
-};
-
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromExtractors([tokenExtractor]),
+  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
   secretOrKey: process.env.SECRET_KEY_BASE
 };
 
