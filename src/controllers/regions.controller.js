@@ -76,7 +76,7 @@ const remove = async ctx => {
 };
 
 export default {
-	all,
+  all,
   get,
   create,
   update,

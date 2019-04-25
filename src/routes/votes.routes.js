@@ -2,7 +2,7 @@ import Router from 'koa-router';
 import controller from '../controllers/votes.controller';
 
 const router = new Router({
-	prefix: '/votes'
+  prefix: '/votes'
 });
 
 router.get('/', controller.all);

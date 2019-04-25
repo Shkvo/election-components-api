@@ -1,7 +1,19 @@
+import jwt from 'jsonwebtoken';
+import passport from 'koa-passport';
 import models from '../models';
 import { throwError } from '../helpers/error';
 
 const { Users } = models;
+
+const convertUserData = user => ({
+  id: user.id,
+  uid: user.uid,
+  firstName: user.firstName,
+  lastName: user.lastName,
+  thirdName: user.thirdName,
+  passportSerial: user.passportSerial,
+  birthDate: user.birthDate,
+});
 
 const all = async ctx => {
   try {
@@ -75,9 +87,31 @@ const remove = async ctx => {
   }
 };
 
+const login = async ctx => {
+  return passport.authenticate('local', (err, user) => {
+    if (user) {
+      const token = jwt.sign(convertUserData(user), process.env.SECRET_KEY_BASE);
+      ctx.set({ 'Authorization': token });
+      ctx.body = { user: convertUserData(user), token };
+    } else {
+      err && throwError(ctx, err);
+    }
+  })(ctx);
+};
+
+const logout = async ctx => {
+  ctx.logout();
+  ctx.body = {
+    status: 'success',
+    data: ctx.state.currentUser
+  };
+};
+
 export default {
-	all,
+  all,
   get,
+  login,
+  logout,
   create,
   update,
   remove

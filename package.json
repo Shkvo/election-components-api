@@ -10,6 +10,9 @@
     "@babel/preset-env": "^7.1.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^7.0.0",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.6.1",
     "koa-bodyparser": "^4.2.1",
     "koa-convert": "^1.2.0",
@@ -17,11 +20,15 @@
     "koa-logger": "^3.2.0",
     "koa-passport": "^4.1.1",
     "koa-router": "^7.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "pg": "^7.6.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.41.0"
   },
   "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.26.0"
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2"
   }
 }

@@ -47,7 +47,8 @@ const create = async ctx => {
 const update = async ctx => {
   try {
     const candidate = ctx.request.body;
-    const data = await Candidates.update(candidate);
+    const { id } = ctx.params;
+    const data = await Candidates.update(candidate, { where: { id } });
 
     ctx.body = {
       status: 'success',
