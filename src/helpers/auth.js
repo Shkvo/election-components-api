@@ -2,13 +2,13 @@ import passport from 'koa-passport';
 import { throwError } from './error';
 
 const authenticate = async(ctx, next) => {
-  await passport.authenticate('jwt', { session: false }, async(_err, user) => {
+  await passport.authenticate('jwt', { session: false }, async(err, user) => {
     if (user) {
       ctx.state.currentUser = user;
       ctx.state.currentUserId = user.dataValues.id;
       await next();
     } else {
-      throwError(ctx, 'Error');
+      throwError(ctx, err);
     }
   })(ctx, next);
 };
@@ -23,7 +23,18 @@ const checkLoggedIn = async(ctx, next) => {
   })(ctx, next);
 };
 
+const convertUserData = user => ({
+  id: user.id,
+  uid: user.uid,
+  firstName: user.firstName,
+  lastName: user.lastName,
+  thirdName: user.thirdName,
+  passportSerial: user.passportSerial,
+  birthDate: user.birthDate,
+});
+
 export default {
   authenticate,
-  checkLoggedIn
+  checkLoggedIn,
+  convertUserData
 };

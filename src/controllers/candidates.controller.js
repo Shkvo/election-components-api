@@ -61,11 +61,8 @@ const update = async ctx => {
 
 const remove = async ctx => {
   const { id } = ctx.params;
-  const candidate = await Candidates.findOne({
-    where: {
-      id
-    }
-  });
+  const candidate = await Candidates.findOne({ where: { id } });
+
   try {
     await candidate.destroy();
     ctx.body = {

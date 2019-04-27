@@ -47,7 +47,8 @@ const create = async ctx => {
 const update = async ctx => {
   try {
     const region = ctx.request.body;
-    const data = await Regions.update(region);
+    const { id } = ctx.params;
+    const data = await Regions.update(region, { where: { id } });
 
     ctx.body = {
       status: 'success',
@@ -60,11 +61,8 @@ const update = async ctx => {
 
 const remove = async ctx => {
   const { id } = ctx.params;
-  const region = await Regions.findOne({
-    where: {
-      id
-    }
-  });
+  const region = await Regions.findOne({ where: { id } });
+
   try {
     await region.destroy();
     ctx.body = {
