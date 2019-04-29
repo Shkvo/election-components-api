@@ -46,6 +46,7 @@ const create = async ctx => {
 
 const overall = async ctx => {
   try {
+    const total = await Votes.count();
     const data = await Votes.findAll({
       include: ['candidate'],
       attributes: [[sequelize.fn('count', sequelize.col('Votes.id')), 'votes']],
@@ -54,7 +55,10 @@ const overall = async ctx => {
 
     ctx.body = {
       status: 'success',
-      data
+      data: {
+        list: data,
+        total
+      }
     };
   } catch (error) {
     throwError(ctx, error);
@@ -64,7 +68,11 @@ const overall = async ctx => {
 const region = async ctx => {
   try {
     const { id } = ctx.params;
-
+    const total = Votes.count({
+      where: {
+        regionId: id
+      }
+    });
     const data = await Votes.findAll({
       where: {
         regionId: id
@@ -76,7 +84,10 @@ const region = async ctx => {
 
     ctx.body = {
       status: 'success',
-      data
+      data: {
+        list: data,
+        total
+      }
     };
   } catch (error) {
     throwError(ctx, error);
