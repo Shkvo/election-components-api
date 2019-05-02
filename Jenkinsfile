@@ -16,7 +16,6 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh 'ls'
                 sh 'npm start'
             }
         }
