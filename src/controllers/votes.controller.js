@@ -68,7 +68,7 @@ const overall = async ctx => {
 const region = async ctx => {
   try {
     const { id } = ctx.params;
-    const total = Votes.count({
+    const total = await Votes.count({
       where: {
         regionId: id
       }

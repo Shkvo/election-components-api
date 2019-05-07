@@ -6,9 +6,9 @@ import { convertUserData } from '../helpers/auth';
 
 const { Users } = models;
 
-const all = async ctx => {
+const total = async ctx => {
   try {
-    const data = await Users.findAll();
+    const data = await Users.count();
 
     ctx.body = {
       status: 'success',
@@ -98,7 +98,7 @@ const logout = async ctx => {
 };
 
 export default {
-  all,
+  total,
   get,
   login,
   logout,

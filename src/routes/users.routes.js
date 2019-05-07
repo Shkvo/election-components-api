@@ -5,7 +5,7 @@ const router = new Router({
   prefix: '/users'
 });
 
-router.get('/', controller.all);
+router.get('/total', controller.total);
 router.post('/', controller.create);
 router.post('/login', controller.login);
 router.put('/:id', controller.update);
