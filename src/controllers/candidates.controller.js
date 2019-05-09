@@ -32,7 +32,8 @@ const get = async ctx => {
 
 const create = async ctx => {
   try {
-    const candidate = ctx.request.body;
+    const { candidate } = ctx.request.body;
+
     const data = await Candidates.create(candidate);
 
     ctx.body = {
@@ -46,9 +47,11 @@ const create = async ctx => {
 
 const update = async ctx => {
   try {
-    const candidate = ctx.request.body;
+    const { candidate } = ctx.request.body;
     const { id } = ctx.params;
-    const data = await Candidates.update(candidate, { where: { id } });
+    const data = await Candidates.findByPk(id);
+
+    await data.update(candidate);
 
     ctx.body = {
       status: 'success',
