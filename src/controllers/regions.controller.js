@@ -32,7 +32,7 @@ const get = async ctx => {
 
 const create = async ctx => {
   try {
-    const region = ctx.request.body;
+    const { region } = ctx.request.body;
     const data = await Regions.create(region);
 
     ctx.body = {
@@ -46,9 +46,11 @@ const create = async ctx => {
 
 const update = async ctx => {
   try {
-    const region = ctx.request.body;
+    const { region } = ctx.request.body;
     const { id } = ctx.params;
-    const data = await Regions.update(region, { where: { id } });
+    const data = await Regions.findByPk(id);
+
+    await data.update(region);
 
     ctx.body = {
       status: 'success',
