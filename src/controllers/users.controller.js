@@ -35,7 +35,7 @@ const get = async ctx => {
 
 const create = async ctx => {
   try {
-    const user = ctx.request.body;
+    const { user } = ctx.request.body;
     const data = await Users.create(user);
 
     ctx.body = {

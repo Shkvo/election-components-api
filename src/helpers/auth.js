@@ -33,7 +33,7 @@ const convertUserData = user => ({
   birthDate: user.birthDate,
 });
 
-export default {
+export {
   authenticate,
   checkLoggedIn,
   convertUserData

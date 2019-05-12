@@ -32,12 +32,11 @@ const get = async ctx => {
 
 const create = async ctx => {
   try {
-    const vote = ctx.request.body;
-    const data = await Votes.create(vote);
+    const { vote } = ctx.request.body;
+    await Votes.create(vote);
 
     ctx.body = {
       status: 'success',
-      data
     };
   } catch (error) {
     throwError(ctx, error);
