@@ -19,11 +19,15 @@ const all = async ctx => {
 const get = async ctx => {
   try {
     const { id } = ctx.params;
-    const data = await Votes.findByPk(id);
+    const data = await Votes.find({
+      where: {
+        userId: id
+      }
+    });
 
     ctx.body = {
       status: 'success',
-      data
+      data: !!data
     };
   } catch (error) {
     throwError(ctx, error);

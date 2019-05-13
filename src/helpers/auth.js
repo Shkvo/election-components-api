@@ -26,6 +26,7 @@ const checkLoggedIn = async(ctx, next) => {
 const convertUserData = user => ({
   id: user.id,
   uid: user.uid,
+  regionId: user.regionId,
   firstName: user.firstName,
   lastName: user.lastName,
   thirdName: user.thirdName,

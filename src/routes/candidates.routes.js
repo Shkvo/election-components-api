@@ -1,14 +1,15 @@
 import Router from 'koa-router';
 import controller from '../controllers/candidates.controller';
+import { authenticate } from '../helpers/auth';
 
 const router = new Router({
   prefix: '/candidates'
 });
 
 router.get('/', controller.all);
-router.post('/', controller.create);
-router.put('/:id', controller.update);
+router.post('/', authenticate, controller.create);
+router.put('/:id', authenticate, controller.update);
 router.get('/:id', controller.get);
-router.delete('/:id', controller.remove);
+router.delete('/:id', authenticate, controller.remove);
 
 module.exports = router;
