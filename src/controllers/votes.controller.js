@@ -34,16 +34,23 @@ const get = async ctx => {
   }
 };
 
-const create = async ctx => {
+const create = socket => async vote => {
   try {
-    const { vote } = ctx.request.body;
     await Votes.create(vote);
+    const total = await Votes.count();
+    const data = await Votes.findAll({
+      include: ['candidate'],
+      attributes: [[sequelize.fn('count', sequelize.col('Votes.id')), 'votes']],
+      group: ['candidate.id']
+    });
 
-    ctx.body = {
-      status: 'success',
-    };
+    socket.broadcast.emit('overall', {
+      total,
+      list: data
+    });
+
   } catch (error) {
-    throwError(ctx, error);
+    throw error;
   }
 };
 
